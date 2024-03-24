@@ -6,7 +6,7 @@
 
 - Instead of default domain name provided by AWS, I have configured a custom domain in Route 53. 
 
-- AWS services used - S3, Cloudfront, ACM, ACM.
+- AWS services used - S3, Cloudfront, ACM, Route 53.
 
 ![alt text](Images/cf-custom-website.png)
 
