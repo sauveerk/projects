@@ -2,7 +2,7 @@
 
 - I have created an html file for my resume. Through below steps, I have configured my resume as a S3 static website. 
 
-- S3 static website does not support https, so to make my website secure, I have put it behind a cloudfront distribution. 
+- S3 static website does not support https, website endpont that you see under S3 properties is http only. So,to make my website secure, I have put it behind a cloudfront distribution. 
 
 - Instead of default domain name provided by AWS, I have configured a custom domain in Route 53. 
 
@@ -121,6 +121,43 @@
 ![alt text](Images/cf-custom-website.png)
 
 - Congratulations! Your AWS S3 static website is now deployed and served through CloudFront.
+
+## Step 8: Additional Security (optional)
+
+- In above configuration, S3 bucket is open for public (anonymous) access and s3 endpoint can be directly accessed. To restrict access from cloudfront only, restrict access with a Referer header.
+
+- Under Add custom header, choose Add header. For Header name, enter Referer. For Value, enter a customer header value that you want to forward to the origin (S3 bucket). To restrict access to the origin, enter a random or secret value that only you know.
+
+![alt text](Images/header-1.png)
+
+![alt text](Images/header-2.png)
+
+- Open your website's bucket from the Amazon S3 console. Then, add a bucket policy that allows s3:GetObject on the condition that the request includes the custom Referer header that you specified in above step. To block access for any request that doesn't include the custom Referer header, use an explicit deny statement in the bucket policy.
+
+- For this configuration, you must turn off the S3 bucket's block public access settings. Amazon S3 considers a bucket policy that grants anonymous access restricted by a Referer to be public.
+
+## Step 9: Additional Security (optional)
+
+- In above configuration, S3 bucket block public access setting is off. Also, cloudfront to S3 connection is http only, not https. 
+
+- To fix these, use the REST API endpoint as the origin. Then, restrict access with an origin access control (OAC). **(Note - Not recommended, for hosting websites, it is recommended to use S3 static website).**
+   
+- You don't need to turn on static website hosting on your bucket for this configuration. This configuration uses the REST API endpoint of the bucket instead of the website endpoint from the static website hosting feature. 
+  
+- When you create your distribution, enter your Amazon S3 bucket name in Origin Domain field. You can choose bucket endpoint, even if static website is enabled. **(Note - this is not recommended by AWS, in cloudfront console when you select this option, it gives warning to choose website endpoint instead).**
+  
+  ![alt text](Images/oac-1.png)
+
+- Under Origin access, select Origin access control settings (recommended).
+
+- In the Origin access control dropdown list, select the OAC name, or create new, and choose Create control setting.
+
+![alt text](Images/oac-2.png)
+
+- CloudFront provides you with the policy statement to give OAC permission to access your Amazon S3 bucket after you create the distribution. Select Copy Policy and paste the policy in your S3 bucket policy configuration.
+
+
+
 
 
 
