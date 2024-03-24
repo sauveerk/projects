@@ -11,7 +11,7 @@
 - Select your newly created bucket and click on the "Upload" button.
 - Upload all your static website files (HTML, CSS, JavaScript, images, etc.) to the bucket.
 
-![alt text](image.png)
+![alt text](Images/image.png)
 
 ## Step 3: Enable Static Website Hosting
 
@@ -19,9 +19,9 @@
 - Select "Use this bucket to host a website" and specify the index document (e.g., index.html).
 - Note down the endpoint URL provided (e.g., http://your-bucket-name.s3-website-your-region.amazonaws.com).
 
-![alt text](image-1.png)
+![alt text](Images/image-1.png)
 
-![alt text](image-2.png)
+![alt text](Images/image-2.png)
 
 ## Step 4: Create a CloudFront Distribution
 
