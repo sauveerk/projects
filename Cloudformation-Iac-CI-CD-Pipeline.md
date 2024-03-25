@@ -41,7 +41,7 @@ Resources:
         - Key: Purpose
           Value: Testing CFT Pipelne
 ```
-- Parameters.json passes bucket name as a parameter.
+- Parameters.json passes bucket name as a parameter. This is an optional file. I have added it here just to show this feature.
   
  ``` 
   {
