@@ -159,7 +159,7 @@ myvpc.cloud.com). For outbound endpoint, we also need to configure a rule to for
 
 - This set up is only to demonstrate on-prem and cloud scenario. If everything is in AWS, we can simply associate same private hosted zone with multiple VPCs. Zones can be associated with VPCs in different accounts also, but using CLI or SDK, not console.
 
-- Resolver forwarding rules can be associated with multiple VPCs if they are in same account. If VPCs are in different accounts, rules can be shared using RAM (Resource Access Manager).
+- Resolver forwarding rules can be associated with multiple VPCs if they are in same account. If VPCs are in different accounts, rules can be shared using RAM (Resource Access Manager). This is used for creating a centralized configuration.
 
-- Some organizations do not use Route 53 even for cloud resources. They use their own DNS servers for cloud resources also. These are configured for VPCs using DHCP option sets.
+- Some organizations do not use Route 53 even for cloud resources. They use their own DNS servers for cloud resources also. DNS for these VPCs are configured using DHCP option sets.
 
