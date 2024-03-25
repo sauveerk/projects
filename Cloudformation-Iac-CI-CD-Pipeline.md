@@ -4,7 +4,7 @@
 
 - We will create a CI/CD pipeline using CodePipeline. When we commit our code, pipeline will be triggered and deploy the template.
 
-- AWS Services Used - CodeCommit, CodePipeline, Cloudformation, S3
+- AWS services used - CodeCommit, CodePipeline, Cloudformation, S3
 
 ## Step 1: Set up AWS CodeCommit Repository
 
