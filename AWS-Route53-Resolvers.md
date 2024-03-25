@@ -1,10 +1,10 @@
 # Hybrid DNS
 
-When on-prem environment is connected to cloud, generally different domains are used to differentiate between resources. This requries hybrid Domain Name System (DNS) architecture that enables end-to-end DNS resolution of on-premise resources and AWS resources.
+When on-prem environment is connected to cloud, generally different domains are used to differentiate between resources. This requires hybrid Domain Name System (DNS) architecture that enables end-to-end DNS resolution of on-premise resources and AWS resources.
 
- Below steps describe how to set up Amazon Route 53 Resolver  rules that determine where a DNS query that originates from AWS should be sent, based on the domain name. DNS queries for on-premises resources are forwarded to on-premises DNS resolvers. DNS queries for AWS resources and internet DNS queries are resolved by Route 53 Resolver.
+ Below steps describe how to set up Amazon Route 53 Resolver  endpoints and rules that determine where a DNS query that originates from AWS should be sent, based on the domain name. DNS queries for on-premises resources are forwarded to on-premises DNS resolvers. DNS queries for AWS resources and internet DNS queries are resolved by Route 53 Resolver.
 
- I am setting up two VPCs and attaching private hosted zones to them configured for separate domains. One of these VPCs will act as on-prem VPC.
+ We are setting up two VPCs, one of these VPCs will act as on-prem VPC. Route 53 Private Hosted Zones will act as DNS resolvers for these VPCs, these are configured for different domains. VPC peering is used to simulate on-prem to cloud connectivity.
 
  ![alt text](image.png)
 
