@@ -40,7 +40,8 @@ When on-prem environment is connected to cloud, generally different domains are 
 
 - Now that connectivity is established, we will be able to reach these 2 ec2 instances from each other. 
 
--Pinging cloud-instance from on-prem-instance
+- Pinging cloud-instance from on-prem-instance
+
 ![alt text](image-15.png)
 
 - Pinging on-prem-instance from cloud-instance
