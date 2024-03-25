@@ -38,6 +38,15 @@ When on-prem environment is connected to cloud, generally different domains are 
 
 ![alt text](image-14.png)
 
+
+## Step 2: Deploy 2 EC2 Instances in the VPCs
+
+- Navigate to the EC2 service in the AWS Management Console.
+- Launch an EC2 instance and select on-prem-networke VPC. Choose t2.micro or t3.micro instance types, select a key pair, keep other settings as default and create the instance.
+- Repeat the process to launch another EC2 instance in the second VPC, cloud-vpc.
+
+![alt text](image-5.png)
+
 - Now that connectivity is established, we will be able to reach these 2 ec2 instances from each other. 
 
 - Pinging cloud-instance from on-prem-instance
@@ -48,15 +57,7 @@ When on-prem environment is connected to cloud, generally different domains are 
 
 ![alt text](image-16.png)
 
-## Step 2: Deploy 2 EC2 Instances in the VPCs
-
-- Navigate to the EC2 service in the AWS Management Console.
-- Launch an EC2 instance and select on-prem-networke VPC. Choose t2.micro or t3.micro instance types, select a key pair, keep other settings as default and create the instance.
-- Repeat the process to launch another EC2 instance in the second VPC, cloud-vpc.
-
-![alt text](image-5.png)
-
-- We want our instances to have proper DNS names instead of default AWS provided names. This can be done via private hosted zones. Private hosted zones will be DNS servers for these VPCs.
+- We want these instances to have proper DNS names instead of default AWS provided names. This can be done via private hosted zones. Private hosted zones will be DNS servers for these VPCs.
   
   ![alt text](image-8.png)
   
@@ -91,7 +92,7 @@ When on-prem environment is connected to cloud, generally different domains are 
 
 ![alt text](image-18.png)
 
-- Now we have a standard DNS name for our on-prem-instance and it can be resolved. 
+- Now, we have a standard DNS name for our on-prem-instance and it can be resolved. 
 
 ![alt text](image-20.png)
 
@@ -103,32 +104,35 @@ When on-prem environment is connected to cloud, generally different domains are 
 
 ![alt text](image-30.png)
 
-- On same lines, cloud-instance is able to resolve it, but on-prem-instance is not able to resolve it.
+- On similar lines, cloud-instance is able to resolve it, but on-prem-instance is not able to resolve it.
 
 ![alt text](image-31.png)
 
 ![alt text](image-32.png)
 
+- To connect these 2 DNS systems, we will take help of Route 53 resolver endpoints and rules.
+
 ## Step 4: Create Inbound and Outbound Resolver Endpoints in Route 53
 
 - Go to the Route 53 service in the AWS Management Console.
+  
 - Select Create Inbound Endpoint under Resolver.
   
   ![alt text](image-22.png)
 
-- Give a name to endpoint. Select cloud-vpc. Select a security group that allows  rules must allow TCP and UDP access on port 53. Select IPV4 for endpoint type. 
+- Give a name to endpoint. Select cloud-vpc. Select a security group that allows  inbound TCP and UDP access on port 53. Select IPV4 for endpoint type. 
   
   ![alt text](image-23.png)
 
-- Select options for assigning IP addresses to the endpoint.
+- Select availability zones and subnets for assigning IP addresses to the endpoint. Resolver endpoints create ENIs, AWS recommends two subnets in two availability zones.
 
 ![alt text](image-24.png)
 
--- Verify that inbound endpoint has been created.
+- Verify that inbound endpoint has been created.
 
 ![alt text](image-26.png)
 
-- Next, create outbound resolver endpoints for on-prem-network VPC by selecting "Outbound Endpoint." Simliar to above, give a name, select VPC and IP addresses. Security group selected  must allow TCP and UDP access on the port 53.
+- Next, create outbound resolver endpoints for on-prem-network VPC by selecting "Outbound Endpoint." Simliar to above, give a name, select VPC and subnets. Security group selected  must allow outbound TCP and UDP access on the port 53.
   
   ![alt text](image-25.png)
 
@@ -136,7 +140,7 @@ When on-prem environment is connected to cloud, generally different domains are 
 
 ![alt text](image-27.png)
 
-- Create resolver rule to forward queries from on-prem-network VPC to cloud-vpc resolver inbound endpoint if domain being queried is cloud-vpc domain, i.e., myvpc.cloud.com.
+- Create resolver rule to forward queries from on-prem-network VPC to cloud-vpc resolver inbound endpoint if domain being queried is cloud-vpc domain, i.e., myvpc.cloud.com. Target IP addresses will be inbound endpoint IP addresses.
   
   ![alt text](image-28.png)
 
@@ -147,9 +151,5 @@ When on-prem environment is connected to cloud, generally different domains are 
 - Similarly, we can create inbound endpoint for on-prem domain (onprem.mydc.com) and outbound endpoint for cloud domain (
 myvpc.cloud.com). For outbound endpoint, we also need to configure a rule to forward quries for onprem.mydc.com to on-prem inbound endpoint.
 
-## Step 5: Additional Considerations
-
-- Implement appropriate security measures such as network ACLs, security groups, and IAM roles.
-- Monitor the health and performance of your VPCs, EC2 instances, and Route 53 resolver endpoints using CloudWatch.
-- Regularly review and update your infrastructure configurations based on changing requirements and best practices.
+- Now, we have set up hybrid DNS between on-prem and cloud.
 
