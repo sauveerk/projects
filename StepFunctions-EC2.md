@@ -9,12 +9,12 @@
   
   - I have created the required workflow, which takes as input instance ID and image name.
   
-  ![alt text](image-11.png)
+  ![alt text](Images/sf-1.png)
 
 ## Step 2: Create an ec2 instance
    - Create an ec2 instance in normal way using whatever method you prefer.
   
-![alt text](image-2.png)
+![alt text](Images/sf-2.png)
 
 ## Step 3: Run state function
    - Run the state function, pass instance id and image name as parameters.
@@ -25,21 +25,21 @@
 }
 
 
-![alt text](image-3.png)
+![alt text](Images/sf-3.png)
 
 ## Step 4: Verify the Execution
  - Verify in the console that execution has succeded
   
-  ![alt text](image-6.png)
+  ![alt text](Images/sf-6.png)
  
  - Verify that Image with name sftestimage has been created
    
-   ![alt text](image-7.png)
+   ![alt text](Images/sf-7.png)
 
 - Verify that instance i-0b464193ccc3426c0 has been terminated
   
-  ![alt text](image-8.png)
+  ![alt text](Images/sf-8.png)
 
 - Verify your notification message 
   
- ![alt text](image-10.png)
+ ![alt text](Images/sf-10.png)
