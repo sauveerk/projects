@@ -44,4 +44,10 @@
   
  ![alt text](Images/state-function/sf-10.png)
 
+ ## Step 5: Additional Considerations
+
+ - SNS is just sending the result from previous step as notification. We can modify it to make it more clearly legible to a layperson. 
+  
+- This is very simple and straightforward step function. A production function will have error handling logic using retry and catch also.
+
   
