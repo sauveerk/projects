@@ -50,7 +50,8 @@
   
 - This is very simple and straightforward step function. A production function will have error handling logic using retry and catch also.
 
---Definition of this Step Function is following.
+- Definition of this Step Function is following.
+  
 ```
 {
   "Comment": "A description of my state machine",
@@ -79,7 +80,7 @@
       "Type": "Task",
       "Resource": "arn:aws:states:::sns:publish",
       "Parameters": {
-        "TopicArn": "arn:aws:sns:ap-south-1:888900372248:my-notifications-topic",
+        "TopicArn": "arn:aws:sns:ap-south-1:<account number>:my-notifications-topic",
         "Message": {
           "Instance": "$.TerminatingInstances.InstanceId",
           "State": "$.TerminatingInstances.CurrentSate.Name",
