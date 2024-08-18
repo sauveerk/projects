@@ -78,9 +78,9 @@ def lambda_handler(event, context):
 
 - It has one log stream for each day, where we can see the details of that day's run.
 
-![alt text](/Images/instance-stop/logs.png)
+![alt text](/Images/instance-stop/log.png)
 
-![alt text](/Images/instance-stop/logsstream.png)
+![alt text](/Images/instance-stop/logstream.png)
 
 ## Step 5: Additional Considerations
 
