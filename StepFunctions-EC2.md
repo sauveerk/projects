@@ -50,4 +50,46 @@
   
 - This is very simple and straightforward step function. A production function will have error handling logic using retry and catch also.
 
+--Definition of this Step Function is following.
+```
+{
+  "Comment": "A description of my state machine",
+  "StartAt": "CreateImage",
+  "States": {
+    "CreateImage": {
+      "Type": "Task",
+      "Parameters": {
+        "InstanceId.$": "$.Instance",
+        "Name.$": "$.Imagename"
+      },
+      "Resource": "arn:aws:states:::aws-sdk:ec2:createImage",
+      "Next": "TerminateInstances",
+      "ResultPath": "$.taskresult"
+    },
+    "TerminateInstances": {
+      "Type": "Task",
+      "Parameters": {
+        "InstanceIds.$": "States.Array($.Instance)"
+      },
+      "Resource": "arn:aws:states:::aws-sdk:ec2:terminateInstances",
+      "ResultPath": "$.taskresult",
+      "Next": "SNS Publish"
+    },
+    "SNS Publish": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sns:publish",
+      "Parameters": {
+        "TopicArn": "arn:aws:sns:ap-south-1:888900372248:my-notifications-topic",
+        "Message": {
+          "Instance": "$.TerminatingInstances.InstanceId",
+          "State": "$.TerminatingInstances.CurrentSate.Name",
+          "Image": "$.Imagename"
+        }
+      },
+      "End": true
+    }
+  }
+}
+
+```
   
