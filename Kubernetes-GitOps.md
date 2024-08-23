@@ -8,7 +8,7 @@
 
 - AWS services used - EKS, ECR, CodeCommit, CodeBuild, CodePipeline. We are also using ArgoCD, a GitOps tool.
 
-## Step 1: DevOps Shortcoming Demo
+## Step 1: DevOps Challenges Demo
 
 - I have deleted the LoadBalancer service. 
 
