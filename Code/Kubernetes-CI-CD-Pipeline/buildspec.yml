@@ -1,0 +1,32 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      # Install kubectl on codebuild server
+      - curl -sS -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.30.2/2024-07-12/bin/linux/amd64/kubectl
+      - chmod +x ./kubectl 
+      - export PATH=$PWD/:$PATH
+  pre_build:
+      commands:
+        # Login to ECR Registry for docker to push the image to ECR Repository
+        - AWS_REGION=ap-south-1
+        - TAG="$REPOSITORY_NAME.$REPOSITORY_BRANCH.$ENVIRONMENT_NAME.$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
+        - echo $TAG
+        - echo $REPOSITORY_URI
+        - echo $REPOSITORY_URI:$TAG
+        - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI:$TAG"'@' hello-eks.yaml
+        - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin $REPOSITORY_URI
+        - export KUBECONFIG=$HOME/.kube/config
+  build:
+    commands:
+      # Build Docker Image
+      - docker build -t $REPOSITORY_URI:$TAG .
+
+  post_build:
+    commands:
+      # push docker image to ECR
+      - docker push $REPOSITORY_URI:$TAG
+      # set up kubectl with our cluster and apply the manifest file
+      - aws eks update-kubeconfig --region ap-south-1 --name $EKS_CLUSTER_NAME
+      - kubectl apply -f hello-eks.yaml
