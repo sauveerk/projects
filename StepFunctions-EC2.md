@@ -4,7 +4,7 @@
 
 - In this example, step function is taking an AMI of the instance for backup before terminating and is sending a notfication email afterwards to inform about the result. 
 
-## Step 1: Creat a Step function
+## Step 1: Create a Step function
    - AWS console provides a great visual canvas to create step functions. We can drag and drop components from left hand panel and create the workflow. Step functions integrate with most of the AWS services.
   
   - I have created the required workflow, which takes as input instance ID and image name.
