@@ -61,7 +61,7 @@
 - In this set up, we have only a single repo and ArgoCD polling it. There is no other tool needed. Real life projects are more complicated. Traditional Devops pipeline is used for CI (continuous integration) part and Gitops is used for CD (continuous deployment) part.
   
 - For example, one popular set up is that there will be two repos - app and k8s-manifest. 
-  a) Code will be pushed to application repo, it will trigger a Devops pipeline, which will build and test the application, package it into a container image and push to some container repository. 
-  b) Another pipeline will be triggered (or same pipeline can do it), which will modify the manifest file with reference of latest image in k8s-manifest repo. This change will be noticed by GitOps tools like ArgoCD and it will apply the changes to the EKS cluster.
+  **a)** Code will be pushed to application repo, it will trigger a Devops pipeline, which will build and test the application, package it into a container image and push to some container repository. 
+  **b)** Another pipeline will be triggered (or same pipeline can do it), which will modify the manifest file with reference of latest image in k8s-manifest repo. This change will be noticed by GitOps tools like ArgoCD and it will apply the changes to the EKS cluster.
 
   ![alt text](Images/k8-gitops/realarch.png)

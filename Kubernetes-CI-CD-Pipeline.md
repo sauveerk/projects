@@ -29,11 +29,11 @@ eksctl create nodegroup \
   --managed \
   --spot 
 
--Verify that cluster and nodegroups have been created in console
+- Verify that cluster and nodegroups have been created in console
 
 ![alt text](Images/k8-pipe/K8sCluster.png)
 
--Run this command to work on your cluster using kubectl.
+- Run this command to work on your cluster using kubectl.
 
 aws eks update-kubeconfig --region ap-south-1 --name my-cluster
 
