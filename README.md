@@ -7,3 +7,4 @@ I have added few AWS projects here. These are mini versions of real world use ca
 - e) IaC CI/CD Pipeline - Organizations deploy resources using Infra as Code (IaC), generally using Terraform (the most popular) or Cloudformation (for AWS), using a CI/CD pipeline.
 - f) Lamdba, S3, DynamoDB - Along with API Gateway (entrypoint) and Cognito (authorization) these three services are building blocks of serverless applications in AWS. This project though is an example of event driven serverlss architecture.
 - g) Step Functions - Step Functions are a great way to orchestrate multiple activities, in this example, before terminating any server, an AMI is created for backup. 
+- h) Kubernetes Deployment - Deploying to an EKS cluster using DevOps and GitOps methods.
