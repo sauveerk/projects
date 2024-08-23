@@ -67,12 +67,13 @@ aws eks update-kubeconfig --region ap-south-1 --name my-cluster
 - Create a pipeline from the console. Source will be above CodeCommit repo. Select above CodeBuild project in build stage. Skip deploy stage, as deployment is being done by CodeBuild.
   
 - Provide environment variables being referred to in the buildspec file in the pipeline.
-  
+
+```  
 EKS_CLUSTER_NAME - eks cluster name
 REPOSITORY_URI  - ecr repo URI
 REPOSITORY_NAME - CodeCommit repo name
 REPOSITORY_BRANCH - main
-  
+```  
 - Pipeline will start running after creation. Monitor the execution. 
 
 ![alt text](Images/k8-pipe/pipelinesuccess.png)
