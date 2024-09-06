@@ -1,0 +1,68 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'CloudFormation Template for EC2 Instance Deployment'
+
+Parameters:
+  InstanceType:
+    Description: 'EC2 instance type (e.g., t2.micro, t3.medium)'
+    Type: String
+    Default: 't2.micro'
+    AllowedValues: 
+      - t2.micro
+      - t2.small
+      - t2.medium
+      - t3.micro
+      - t3.small
+      - t3.medium
+    ConstraintDescription: 'Must be a valid EC2 instance type.'
+
+Resources:
+  EC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties: 
+      InstanceType: !Ref InstanceType
+      ImageId: !FindInMap 
+        - RegionMap
+        - !Ref 'AWS::Region'
+        - AMI
+      KeyName: 
+        Ref: 'AWS::NoValue' # This assumes no key pair by default. You can modify to include a default key pair.
+      SecurityGroups: 
+        - !Ref InstanceSecurityGroup
+
+  InstanceSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: 'Enable SSH and HTTP access'
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '22'
+          ToPort: '22'
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          CidrIp: 0.0.0.0/0
+
+Mappings:
+  RegionMap:
+    us-east-1:
+      AMI: 'ami-0c55b159cbfafe1f0' # Amazon Linux 2 AMI for us-east-1
+    us-west-1:
+      AMI: 'ami-01e24be29428c15b2' # Amazon Linux 2 AMI for us-west-1
+    eu-west-1:
+      AMI: 'ami-047bb4163c506cd98' # Amazon Linux 2 AMI for eu-west-1
+    ap-south-1:
+      AMI: 'ami-08ee1453725d19cdb' # Amazon Linux 2 AMI for ap-south-1
+
+Outputs:
+  InstanceId:
+    Description: 'Instance ID of the EC2 instance'
+    Value: !Ref EC2Instance
+
+  PublicIP:
+    Description: 'Public IP of the EC2 instance'
+    Value: !GetAtt EC2Instance.PublicIp
+
+  SecurityGroupId:
+    Description: 'Security Group ID'
+    Value: !Ref InstanceSecurityGroup
