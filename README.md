@@ -2,22 +2,24 @@ I have added few AWS projects here. These are mini versions of real world use ca
 
 - Static Serverless Website - Static websites can be deployed using AWS S3 buckets and Cloudfront (optional). **Note-** In fact, dynamic websites can also be deployed where S3 holds the static front end and API Gateway and Lambda functions provide dynamic backend. I will do a different projecg to showcase it.
   
-  https://github.com/sauveerk/projects/blob/main/Cloudfront-S3-Resume.md
+   https://github.com/sauveerk/projects/blob/main/Cloudfront-S3-Resume.md
   
 -  Hybrid DNS - A real world requirement when organization has both cloud and on-prem environment
   
-  https://github.com/sauveerk/projects/blob/main/Hybrid-DNS-AWS-Route53-Resolvers.md 
+   https://github.com/sauveerk/projects/blob/main/Hybrid-DNS-AWS-Route53-Resolvers.md 
   
 - Transit Gateway - Organizations use Transit Gateway to connect their multiple VPCs present in multiple accounts. 
   
-  https://github.com/sauveerk/projects/blob/main/Connecting-VPCs-Using-TransitGateway.md 
+   https://github.com/sauveerk/projects/blob/main/Connecting-VPCs-Using-TransitGateway.md 
 
 - Centralized VPC Endpoints - 
 
-https://github.com/sauveerk/projects/blob/main/Hub-and-Spoke-VPC-Interface-Endpoints.md
+   https://github.com/sauveerk/projects/blob/main/Hub-and-Spoke-VPC-Interface-Endpoints.md
   
 - Service Catalog - Organizations use Service Catalog to provide self service to end users. End users can quickly deploy only the approved IT services they need, following the constraints set by your organization. Service Catalouge can also be integrated with ITSM tools like Service Now. Users can submit Service Now requests which will trigger creation of the product in AWS.
   
+  https://github.com/sauveerk/projects/blob/main/Service-Catalog.md
+    
 - Instance Stopper - Organizations have some set up to stop non-prod instances over weekend and/or during non-business hours. In mature phases, it is expanded to non-critical production systems also. This is a good FinOps practice.
   
   https://github.com/sauveerk/projects/blob/main/InstanceStopper-LambdaFunction.md
