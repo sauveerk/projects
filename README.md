@@ -14,7 +14,7 @@ I have added few AWS projects here. These are mini versions of real world use ca
   
    https://github.com/sauveerk/projects/blob/main/Connecting-VPCs-Using-TransitGateway.md 
 
-- Centralized VPC Endpoints - 
+- Centralized VPC Endpoints - VPC endpoints are private connections between your VPC and another AWS service without sending traffic over the internet, through a NAT instance, a VPN connection, or AWS Direct Connect. Organizations use hub and spoke design where all the spoke VPCs use an interface VPC endpoint provisioned inside the hub (shared services) VPC. This architecture may help reduce the cost and maintenance for multiple interface VPC endpoints across different VPCs.
 
    https://github.com/sauveerk/projects/blob/main/Hub-and-Spoke-VPC-Interface-Endpoints.md
   
