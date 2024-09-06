@@ -2,7 +2,7 @@ I have added few AWS projects here. These are mini versions of real world use ca
 
 - Static Serverless Website - Static websites can be deployed using AWS S3 buckets and Cloudfront (optional). 
   
-  **Note-** In fact, dynamic websites can also be deployed where S3 holds the static front end and API Gateway and Lambda functions provide dynamic backend. I will do a different projecg to showcase it.
+  **Note-** In fact, serverless dynamic websites can also be deployed where S3 holds the static front end and API Gateway and Lambda functions provide dynamic backend. I will do a different project to showcase it.
   
    https://github.com/sauveerk/projects/blob/main/Cloudfront-S3-Resume.md
   
