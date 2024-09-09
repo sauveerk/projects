@@ -48,4 +48,6 @@ I have added few AWS projects here. These are mini versions of real world use ca
 
   https://github.com/sauveerk/projects/blob/main/Kubernetes-GitOps.md
 
+- Implementing a Fanout Pattern using SNS and SQS in AWS - The fanout messaging pattern is a common application integration design pattern used to decouple frontend from backend systems. Here, a single message is sent to multiple endpoints. In AWS, this can be efficiently achieved by integrating Amazon SNS and Amazon SQS.
+
 
