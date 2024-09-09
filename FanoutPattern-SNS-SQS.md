@@ -56,7 +56,7 @@ It enables subscribers to an SNS topic to receive only the subset of topic messa
 
    ![alt text](Images/fanout-sns-sqs/subscriptions.png)
 
-- Go to SNS console, select insurancetopic. We can see our subsriptions listed there. Click on carinsurance Add a subscription filter policy for message attribute and click create subscription.
+- Go to SNS console, select insurancetopic. We can see our subsriptions listed there. Click on carinsurance. Add a subscription filter policy for message attribute and click create subscription.
 
 ```
 {
@@ -68,7 +68,7 @@ It enables subscribers to an SNS topic to receive only the subset of topic messa
    ![alt text](Images/fanout-sns-sqs/carfilter.png)
 
 
-- Similary, add a subscription filter policy for healthinsurance subscription.
+- Similarly, add a subscription filter policy for healthinsurance subscription.
   
 ```
   {
@@ -106,7 +106,7 @@ It enables subscribers to an SNS topic to receive only the subset of topic messa
 
    ![alt text](Images/fanout-sns-sqs/carmessages1.png)
 
-- Similary, we can poll and view single car insurance message received on carinsurance SQS queue.
+- Similarly, we can poll and view single car insurance message received on carinsurance SQS queue.
 
    ![alt text](Images/fanout-sns-sqs/q2message.png)
 
