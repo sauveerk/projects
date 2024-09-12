@@ -17,7 +17,9 @@ These projects are grouped into various categories.
    https://github.com/sauveerk/projects/blob/main/Hub-and-Spoke-VPC-Interface-Endpoints.md
 
 - **Access AWS Accounts with Azure Active Directory Federation** - Organisations do not use AWS IAM directly, generally, they use a central identity management system,  for example, an on-premises Active Directory (AD) or the cloud service Microsoft Azure Active Directory (Azure AD). Instead of implementing user lifecycle processes in each environment, it’s easier, more reliable, and more secure to implement them in a central user identity store such as Azure AD.
-
+  
+  https://github.com/sauveerk/projects/blob/main/AzureAD-Federation-AWS-Access.md
+  
 ## Resource Provisioning
 
 - **Service Catalog** - Organizations use Service Catalog to provide self service to end users. End users can quickly deploy only the approved IT services they need, following the constraints set by your organization. Service Catalouge can also be integrated with ITSM tools like Service Now. Users can submit Service Now requests which will trigger creation of the product in AWS.
