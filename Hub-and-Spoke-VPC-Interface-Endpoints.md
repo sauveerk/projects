@@ -2,81 +2,150 @@
 
 ## Introduction
 
+VPC endpoints are private connections between your VPC and another AWS service without sending traffic over the internet, through a NAT instance, a VPN connection, or AWS Direct Connect. They allow communication between instances in your VPC and services without imposing availability risks. With VPC endpoints, your VPCs don’t need to have Internet Gateway or NAT Gateway for EC2 instances to access AWS services and endpoints. There are two types of VPC endpoints – Gateway endpoints and interface endpoints. Gateway endpoints can be used to access regional S3 bucket and DynamoDB tables and interface endpoints can be used to access AWS service endpoints or VPC endpoint services. Gateway endpoints are free, but interface endpoints are charged at hourly basis.
+
 In a multi-account AWS environment, setting up VPC interface endpoints centrally in a networking account (hub) and sharing them with other accounts (spokes) can provide a streamlined, secure, and cost-effective architecture. This setup allows for better management of network traffic, centralized monitoring, and compliance with organizational policies.
 
+![alt text](Images/interface-endpoint/architecture.png)
+
 This article details the steps to implement a hub-and-spoke architecture for VPC interface endpoints in a multi-account AWS environment. We'll focus on a scenario where the interface endpoint is set up in a central networking account, and other accounts in the organization route their traffic through it.
-
-## Prerequisites
-
-- **AWS Organizations**: A multi-account structure set up with AWS Organizations.
-- **Networking Account**: A designated account to act as the hub for VPC interface endpoints.
-- **Spoke Accounts**: Other AWS accounts that will use the interface endpoint in the networking account.
-- **VPCs**: VPCs in both the networking and spoke accounts.
-- **PrivateLink**: Knowledge of AWS PrivateLink, which enables you to access services securely within the AWS network.
 
 ## Architecture Overview
 
 The architecture involves:
 
-1. **Central Networking Account**: Hosts the VPC interface endpoints and routes traffic to the respective AWS services.
-2. **Spoke Accounts**: Each has its own VPC, and traffic from these VPCs is routed to the central interface endpoints in the networking account.
-
-![Architecture Diagram](https://docs.aws.amazon.com/architecture-diagrams/images/example/hub-and-spoke-model.png)
+1. **Central Networking Account**: Hub account, it hosts the VPC interface endpoints and routes traffic to the respective AWS services.
+2. **Spoke Accounts**: Each has its own VPC, and traffic from these VPCs is routed to the central interface endpoints in the networking account. We will use a single spoke VPC in this demo.
 
 ## Steps to Set Up Hub-and-Spoke VPC Interface Endpoints
 
-### Step 1: Create the Central VPC in the Networking Account
+### Step 1: Hub Account Set Up
 
-1. **Create a VPC** in the networking account with a suitable CIDR block (e.g., `10.0.0.0/16`).
-2. **Create Subnets** in different Availability Zones (AZs) within this VPC, ensuring that the subnets can host the VPC interface endpoints.
-3. **Configure Route Tables** for these subnets, ensuring they route traffic to the appropriate AWS services via the internet gateway, NAT gateway, or VPC peering.
+- I have a VPC with public and private subnets in my hub account. I have launched a private ec2 server in my hub account.   
 
-### Step 2: Create VPC Interface Endpoints in the Networking Account
+![alt text](Images/interface-endpoint/image.png)
 
-1. **Navigate to the VPC Console** in the networking account.
-2. **Create Interface Endpoints** for the required AWS services (e.g., S3, DynamoDB, Secrets Manager). 
-   - Select the VPC created in the previous step.
-   - Choose the subnets where the endpoints will reside.
-   - Enable private DNS names for these endpoints.
+- I have a bastion host in same VPC from which I can connect to my private ec2 server.
 
-3. **Verify Security Groups**: Attach security groups to these endpoints that allow inbound traffic from the spoke VPCs.
+![alt text](Images/interface-endpoint/image-1.png)
 
-### Step 3: Create VPC Peering Connections
-
-1. **Initiate VPC Peering**: 
-   - From the networking account, create a VPC peering connection request to each spoke account's VPC.
-   - Accept the peering requests from the respective spoke accounts.
+- An IAM role is already attached to the server, but because there is no internet access, we cannot access AWS service endpoints. I am trying to list SQS queues and SNS topics, but it is timing out. I have also given a timeout value of 5 seconds to avoid waiting for default timeout value of 60 seconds.
   
-2. **Update Route Tables**:
-   - In the networking account's VPC, update route tables to direct traffic to the spoke VPCs via the peering connections.
-   - In the spoke VPCs, update route tables to direct traffic to the networking account's VPC for the specific endpoint IPs.
+  ![alt text](Images/interface-endpoint/image-2.png)
 
-### Step 4: Share Interface Endpoints with Spoke Accounts
+- To access these services privately, we need to create interface vpc endpoints. Go to VPC console, Endpoints section, choose Create Endpoint.
+  
+  ![alt text](Images/interface-endpoint/image-3.png)
 
-1. **Use AWS Resource Access Manager (RAM)**:
-   - Share the VPC interface endpoints with the spoke accounts using RAM.
-   - Ensure that the shared resources are correctly associated with the relevant VPCs in the spoke accounts.
+- Give the endpoint a name, search for SQS under services, we will get endpoint for the region we are in. Select VPC and private subnet in which our private server is present. Select default security group or any one which allows inbound https access.  Keep other options as default and create endpoint.
 
-2. **Accept the Shared Resources**:
-   - In each spoke account, accept the shared VPC interface endpoints via the AWS RAM console.
-   - Ensure that the necessary security group rules are in place to allow traffic between the spoke VPC and the shared interface endpoint.
+![alt text](Images/interface-endpoint/image-4.png)
 
-### Step 5: Test the Setup
+- Now, we can access SQS service from our private server.
 
-1. **Deploy Resources**: In one of the spoke accounts, deploy a resource (e.g., an EC2 instance) that needs to access the service via the interface endpoint.
-2. **Configure DNS**: Ensure that the spoke account VPCs are using the DNS resolver from the networking account or have DNS resolution properly configured.
-3. **Test Connectivity**: From the spoke resource, test the connectivity to the service via the interface endpoint. Check that the traffic is routed through the central networking account.
+![alt text](Images/interface-endpoint/image-5.png)
 
-### Step 6: Monitor and Secure the Setup
+### Step 2: Connect Hub and Spoke VPCs
 
-1. **Monitor Traffic**: Use AWS CloudWatch, VPC Flow Logs, and AWS Config to monitor traffic, endpoint usage, and configurations.
-2. **Implement Security Best Practices**:
-   - Use security groups and network ACLs to control access to the interface endpoints.
-   - Regularly review and update IAM policies, VPC peering connections, and endpoint settings.
-   - Enable logging for all endpoints and review logs regularly for any unusual activity.
+- Create a VPC in spoke account, ensure that CIDR is not overlapping with hub VPC CIDR.
 
-## Conclusion
+- We need to connect hub VPC with spoke vpc which is present in other AWS account. In real world, mostly Transit Gateway (TGW) is used for connecting VPCs. Here, we will imitate this using VPC peering.
 
-Setting up a hub-and-spoke architecture for VPC interface endpoints in a multi-account AWS environment centralizes control, reduces management overhead, and enhances security. By following the steps outlined in this guide, you can ensure a robust and scalable setup that supports your organization’s network architecture needs.
+- From the hub account, create a VPC peering connection request to spoke account's VPC.
+ 
+![alt text](Images/interface-endpoint/image-6.png)
 
-This setup allows for the efficient management of network traffic and resources, and can easily be expanded as your organization grows.
+- Provide details of both VPCs and create peering connection.
+
+![alt text](Images/interface-endpoint/image-7.png)
+
+- Accept peering request from spoke account.
+
+![alt text](Images/interface-endpoint/image-9.png)
+  
+- Configure the route tables in the hub VPC, and add a rule to route the traffic for corresponding VPC CIDRs by way of a VPC peering connection. I have added it to both private and public subnet route tables.
+  
+  ![alt text](Images/interface-endpoint/image-8.png)
+
+  ![alt text](Images/interface-endpoint/image-12.png)
+
+- In the spoke VPC, update route tables to direct traffic and add a rule to route the traffic for corresponding VPC CIDRs by way of a VPC peering connection.
+
+ ![alt text](Images/interface-endpoint/image-10.png)
+
+### Step 3: Spoke Account Set Up
+
+- Creat a private ec2 sever in spoke VPC in spoke account.
+  
+  ![alt text](Images/interface-endpoint/image-11.png)
+  
+- We can connect to this server using bastion host in hub account. This server has an IAM role attached but because it does not have internet access, so it cannot access AWS services. 
+  
+  ![alt text](Images/interface-endpoint/image-13.png)
+
+- Though, becasuse of peering connection, it will be able to access the interface endpoint present in hub VPC and can use it. But, for that --endpoint-url argument should be passed as it cannot resolve the DNS for the interface endpoint. DNS resolution is happening by default in hub vpc. Now, using interface endpoint, it can list queues present in spoke account.
+   
+   ![alt text](Images/interface-endpoint/image-14.png)
+ 
+- But, we want the DNS resolution to happen by default. So that spoke accounts can access SQS privately without any additional effort.
+  
+  ### Step 4: DNS Configuration and Testing
+   
+- Disable the Private DNS name for the interface VPC endpoint in the hub VPC.
+
+  ![alt text](Images/interface-endpoint/image-18.png)
+
+- Verify it.
+
+  ![alt text](Images/interface-endpoint/image-19.png)
+
+- Create a Private Hosted Zone (PHZ) in Route53 with same name as AWS service endpoint (e.g., sqs.ap-south-1.amazonaws.com in this case) and attach it to the hub VPC.
+
+![alt text](Images/interface-endpoint/image-16.png)
+
+![alt text](Images/interface-endpoint/image-17.png)
+
+- Create an alias record to point to an interface VPC endpoint DNS.
+
+![alt text](Images/interface-endpoint/image-20.png)
+
+![alt text](Images/interface-endpoint/image-26.png)
+
+- Now, hub VPC has attained previous state, and it can resolve the default sqs endpoint, but spoke VPC still cannot do it.
+
+![alt text](Images/interface-endpoint/image-21.png)
+
+- If we want any other VPC to be able to resolve the sqs endpoint and connect via hub interface endpoint, we need to associate that VPC with above created hosted zone. In this case, our spoke vpc is in another account, so attachment can be done using cli commands only.
+
+- If you want to associate a VPC that was created by using one account with a private hosted zone that was created by using a different account, the account that created the private hosted zone must first submit a CreateVPCAssociationAuthorization request. Then the account that created the VPC must submit an AssociateVPCWithHostedZone request.
+  
+- Create authorization request in hub account.
+  
+  aws route53 create-vpc-association-authorization --hosted-zone-id <<id>> --vpc VPCRegion=ap-south-1,VPCId=<<vpc id>>
+  
+  ![alt text](Images/interface-endpoint/image-22.png)
+
+- Approve from spoke account. It will come as pending in the beginning, after few minutes, will become available.
+  
+  aws route53 associate-vpc-with-hosted-zone --hosted-zone-id <<id>> --vpc VPCRegion=ap-south-1,VPCId=<<vpc id>>
+  
+  ![alt text](Images/interface-endpoint/image-23.png)
+
+- Verify the association in Route53 console under PHZ.
+  
+  ![alt text](Images/interface-endpoint/image-24.png)
+
+- Now our spoke vpc server will also be able to resolve default sqs endpoint.
+  
+  ![alt text](Images/interface-endpoint/image-25.png)
+
+### Step 5: Additional Considerations
+
+- Setting up a hub-and-spoke architecture for VPC interface endpoints in a multi-account AWS environment centralizes control, reduces management overhead, and enhances security.
+
+- This setup allows for the efficient management of network traffic and resources, and can easily be expanded as your organization grows.
+
+- To improve resiliency of this design, our interface VPC endpoints should use two or more Availability Zones (AZs).
+  
+- There are limits on everything, few soft (can be increased on request by AWS), few hard (can't be increased), take them into considerations while designing. Check AWS documentation for this.
+  
