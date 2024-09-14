@@ -19,6 +19,8 @@ These projects are grouped into various categories.
 - **Access AWS Accounts with Azure Active Directory (Entra) Federation** - Organizations do not use AWS IAM directly, generally, they use a central identity management system, for example, an on-premises Active Directory (AD) or the cloud service Microsoft Azure Active Directory (Azure AD). Instead of implementing user lifecycle processes in each environment, it’s easier, more reliable, and more secure to implement them in a central user identity store such as Azure AD.
   
   https://github.com/sauveerk/projects/blob/main/AzureAD-Federation-AWS-Access.md
+
+- **Centralized Logging** - A key component of enterprise multi-account environments is logging. Centralized logging provides a single point of access to all salient logs generated across accounts and regions, and is critical for auditing, security and compliance. While some customers use the built-in ability to push Amazon CloudWatch Logs directly into Amazon Elasticsearch Service for analysis, others would prefer to move all logs into a centralized Amazon Simple Storage Service (Amazon S3) bucket location for access by several custom and third-party tools or directly sending to third party tools like Splunk via Amazon Data Firehose. 
   
 ## Resource Provisioning
 
