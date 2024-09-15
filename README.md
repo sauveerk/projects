@@ -22,6 +22,8 @@ These projects are grouped into various categories.
 
 - **Centralized Logging** - A key component of enterprise multi-account environments is logging. Centralized logging provides a single point of access to all salient logs generated across accounts and regions, and is critical for auditing, security and compliance. While some customers use the built-in ability to push Amazon CloudWatch Logs directly into Amazon Elasticsearch Service for analysis, others would prefer to move all logs into a centralized Amazon Simple Storage Service (Amazon S3) bucket location for access by several custom and third-party tools or directly sending to third party tools like Splunk via Amazon Data Firehose. 
   
+  https://github.com/sauveerk/projects/blob/main/Centralized-Logging.md
+  
 ## Resource Provisioning
 
 - **Service Catalog** - Organizations use Service Catalog to provide self-service to end users. End users can quickly deploy only the approved IT services they need, following the constraints set by your organization. Service Catalog can also be integrated with ITSM tools like Service Now. Users can submit Service Now requests which will trigger creation of the product in AWS.
