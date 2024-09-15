@@ -78,7 +78,7 @@ AWS Single-Account Access enables you to federate Microsoft Entra ID to a single
 
 ---
 
-## **Step 4: Configure AWS Single-Account Access SSO**
+## **Step 4: Configure AWS Single-Account Access**
 
 - Log into AWS console, got to IAM.
 
@@ -146,12 +146,12 @@ AWS Single-Account Access enables you to federate Microsoft Entra ID to a single
 
 ![alt text](Images/AzureAD-Federation/image-19.png)
 
-- Applications will also show up in myapps (https://myapps.microsoft.com/). This is how users access it in real life.
+- Applications will also show up in myapps (https://myapps.microsoft.com/). This is how users access it in organizations.
 
    ![alt text](Images/AzureAD-Federation/image-20.png)
 
  ## **Step 7: Additional Considerations**
 
- - Alternative to this approach is federating AWS IAM Identity Center with Azure Entra. But, in this approach permissions has to be managed. AWS IAM Identity Center is somewhat similar to Azure Entra, it is a cental identity mangement system which can be used for accessing AWS accounts and AWS applications like Q, Appstream, QUicksight, etc. 
+ - Alternative to this approach is federating AWS IAM Identity Center with Azure Entra. But, in this approach permissions has to be managed. AWS IAM Identity Center is somewhat similar to Azure Entra, it is a cental identity mangement system which can be used for accessing AWS accounts and AWS applications like Q, AppStream, Quicksight, etc. 
   
 - You can connect IAM Identity Center with your existing identity provider and synchronize users and groups from your directory (Active Directory, Azure Entra, etc.), or create and manage your users directly in IAM Identity Center.

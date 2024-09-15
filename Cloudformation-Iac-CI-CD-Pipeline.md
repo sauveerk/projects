@@ -2,11 +2,11 @@
 
 - We will store cloudformation template and related artifcats in CodeCommit. This will provide version control functionality also. 
 
-- We will create a CI/CD pipeline using CodePipeline. When we commit our code, pipeline will be triggered and deploy the template.
+- We will create a simple CI/CD pipeline using CodePipeline. When we commit our code, pipeline will be triggered and deploy the template.
 
 - AWS services used - CodeCommit, CodePipeline, Cloudformation, S3
 
-## Step 1: Set up AWS CodeCommit Repository
+## Step 1: Set Up AWS CodeCommit Repository
 
 - Navigate to the AWS Management Console and go to the CodeCommit service.
 - Create a new repository or use an existing one to store your CloudFormation template.
@@ -65,7 +65,7 @@ Resources:
   
   ![alt text](Images/cft-pipe/cp-2.png)
 
-- Choose skip on build stage page, as cloudformation deployment does not need a build stage.
+- Choose skip on build stage page, as cloudFormation deployment does not need a build stage.
   
   ![alt text](Images/cft-pipe/cp-3.png)
 
@@ -73,7 +73,7 @@ Resources:
   
   ![alt text](Images/cft-pipe/cp-4.png)
 
-- Select an existing stack or give a new name. Give artifact names present in codecommit - cloudformation template and paramters file (optional).
+- Select an existing stack or give a new name. Give artifact names present in CodeCommit - cloudformation template and paramters file (optional).
   
   ![alt text](Images/cft-pipe/cp-5.png)
   
@@ -117,3 +117,13 @@ Resources:
   ![alt text](Images/cft-pipe/exec-22.png)
 
 - We have succesfully created a pipeline for cloudformation template deployment using source control. We tested initial deployment of the template. Then, we tested modifiying the template and verified deployment of the changes.
+
+## Step 6: Additional Considerations
+
+- This is a very basic pipeline, just for starting out. In organizations, pipeline will be able to deploy to multiple accounts and regions. AWS CodePipeline can deploy to multiple accounts using cross-account IAM roles. 
+  
+- Organizations also use CloudFormation StackSets, these are useful when same resource needs to be deployed to multiple accounts and regions, e.g., an IAM role or a lambda function. AWS CodePipeline can target StackSet deployment also.
+
+- IaC pipelines can also contain other stages like test using various tools, e.g., cfn-lint for checking syntax, cfn-nag/Checkov/Sonar for static security scans, etc.
+
+- Terraform is another popular IaC tool, it is cloud agnostic and can deploy to multiple plaforms. AWS native CI/CD tools can be replaced by other tools like GitHub, GitLab, Jenkins, etc. In fact, AWS deprecated CodeCommit in Aug 2024 for new accounts.
