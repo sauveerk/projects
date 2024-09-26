@@ -30,9 +30,11 @@ These projects are grouped into various categories.
   
   https://github.com/sauveerk/projects/blob/main/Service-Catalog.md
 
-- **IaC CI/CD Pipeline** - Organizations deploy resources using Infra as Code (IaC), generally using Terraform (the most popular) or CloudFormation (for AWS), using a CI/CD pipeline.
+- **IaC CI/CD Pipeline** - Organizations deploy resources using Infra as Code (IaC), generally using Terraform (the most popular) or CloudFormation (for AWS), using a CI/CD pipeline. This is a CloudFormation pipeline which uses AWS tools for CI/CD pipeline.
   
   https://github.com/sauveerk/projects/blob/main/Cloudformation-Iac-CI-CD-Pipeline.md
+
+- **IaC GitHub Actions Terraform Pipeline** - A GitHub Actions based CI/CD pipeline to provision AWS resources using Terraform.
 
 ## Automation
     
@@ -56,7 +58,7 @@ These projects are grouped into various categories.
   
    https://github.com/sauveerk/projects/blob/main/Cloudfront-S3-Resume.md
   
-- **Lambda, S3, DynamoDB** - Along with API Gateway (entrypoint) and Cognito (authorization), these three services are building blocks of serverless applications in AWS. Though, this project is an example of event driven serverless architecture. 
+- **Event Driven Processing Using Lambda, S3, DynamoDB** - Along with API Gateway (entrypoint) and Cognito (authorization), these three services are building blocks of serverless applications in AWS. Though, this project is an example of event driven serverless architecture. 
   
   https://github.com/sauveerk/projects/blob/main/Lambda-S3-Upload-DynamoDB-Inventory.md
     
