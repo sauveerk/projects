@@ -30,11 +30,13 @@ These projects are grouped into various categories.
   
   https://github.com/sauveerk/projects/blob/main/Service-Catalog.md
 
-- **IaC CI/CD Pipeline** - Organizations deploy resources using Infra as Code (IaC), generally using Terraform (the most popular) or CloudFormation (for AWS), using a CI/CD pipeline. This is a CloudFormation pipeline which uses AWS tools for CI/CD pipeline.
+- **IaC CI/CD Pipeline - AWS CodePipeline and CloudFormation** - Organizations deploy resources using Infra as Code (IaC), generally using Terraform (the most popular) or CloudFormation (for AWS), using a CI/CD pipeline. This is a CloudFormation pipeline which uses AWS tools for CI/CD pipeline.
   
   https://github.com/sauveerk/projects/blob/main/Cloudformation-Iac-CI-CD-Pipeline.md
 
-- **IaC GitHub Actions Terraform Pipeline** - A GitHub Actions based CI/CD pipeline to provision AWS resources using Terraform.
+- **IaC CI/CD Pipeline - GitHub Actions and Terraform** - A GitHub Actions based CI/CD pipeline to provision AWS resources using Terraform.
+  
+  https://github.com/sauveerk/projects/blob/main/AWS-Provisioining-Using-Terraform-GitHub-Actions.md
 
 ## Automation
     
