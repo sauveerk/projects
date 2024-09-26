@@ -1,3 +1,4 @@
 *.yml
+!Code/GitHub-Terraform/.github/workflows/ec2-provision.yml 
 WIP-*
 Copy-*
