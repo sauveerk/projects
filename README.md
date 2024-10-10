@@ -38,6 +38,8 @@ These projects are grouped into various categories.
   
   https://github.com/sauveerk/projects/blob/main/AWS-Provisioining-Using-Terraform-GitHub-Actions.md
 
+- **IaC CI/CD Pipeline - GitLab and Ansible** - A GitLab CI/CD pipeline to provision AWS EC2 server and then install Nginx on it.
+
 ## Automation
     
 - **Instance Stopper** - Organizations have some set up to stop non-prod instances over weekend and/or during non-business hours. In mature phases, it is expanded to non-critical production systems also. This is a good FinOps practice.
