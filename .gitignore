@@ -1,4 +1,6 @@
 *.yml
 !Code/GitHub-Terraform/.github/workflows/ec2-provision.yml 
+!Code/GitLab-Ansible/.gitlab-ci.yml 
+!Code/GitLab-Ansible/ansible_ec2_nginx.yml 
 WIP-*
 Copy-*

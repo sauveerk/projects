@@ -1,0 +1,30 @@
+stages:
+  - deploy
+
+image:
+  name: python:3.9-slim
+
+variables:
+  ANSIBLE_HOST_KEY_CHECKING: "False"
+  ANSIBLE_PYTHON_INTERPRRTER: /usr/bin/python3
+
+before_script:
+  - apt-get update && apt-get install -y openssh-client
+  - pip install --upgrade pip
+  - pip install ansible boto3 botocore
+  - ansible --version
+  - pwd
+  - echo "$EC2_KEY" > private-key1.pem   #Create private key to connect to the ec2 server
+  - chmod 600 private-key1.pem 
+  - whoami
+  - ls -ltr
+
+# Deploy EC2 instance using Ansible and install Nginx on it
+deploy_ec2:
+  stage: deploy
+  script:
+    - ansible-playbook ansible_ec2_nginx.yml --private-key private-key1.pem
+  only:
+    - main
+
+
