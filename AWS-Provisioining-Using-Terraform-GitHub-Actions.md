@@ -111,4 +111,45 @@ git push origin main
 
 ![alt text](Images/GitHub-Terraform/image-17.png)
 
+- Taking it one step further, we can add security scanning using Checkov. Checkov is a Static Application Security Testing (SAST) tool. It scans cloud infrastructure configurations to find misconfigurations before they're deployed. 
 
+- Append following to the workflow file. Commit and push the code. 
+
+```
+    #checkov section
+    #- uses: actions/checkout@v2
+    #- name: Set up Python 3.11
+    #  uses: actions/setup-python@v1
+    #  with:
+    #    python-version: 3.11
+        
+    - name: Test with Checkov
+      id: checkov
+      uses: bridgecrewio/checkov-action@v12
+      with:
+        #directory: terraform-provision-ec2
+        framework: terraform
+        soft_fail: true
+        output_format: cli,sarif
+        output_file_path: console,results.sarif
+
+    - name: Upload SARIF file
+      uses: github/codeql-action/upload-sarif@v3
+      
+      # Results are generated only on a success or failure
+      # this is required since GitHub by default won't run the next step
+      # when the previous one has failed. Security checks that do not pass will 'fail'.
+      # An alternative is to add `continue-on-error: true` to the previous step
+      # Or 'soft_fail: true' to checkov.
+      if: success() || failure()
+      with:
+        sarif_file: results.sarif
+```
+
+- Wait for the pipeline to complete. We are uploading the results to GitHub, so we can see the findings under Security section of the repository. Here we have set the pipeline to pass even if there are findings, but pipeline can be made to fail also, generally this is done for high and medium severity findings.
+
+![alt text](Images/GitHub-Terraform/checkov-findings.png)
+
+- Checkov also provides plugins for IDEs like VS Code, using which issues can be caught by developers and fixed before pushing the code. Using Checkov is an example of shift-left of security in DevSecOps.
+  
+- Terraform Cloud/Enterprise provide Sentinel, which is policy-as-a-code tool. It can be used to integrate best practices in the pipeline including avoiding misconfigurations. 
