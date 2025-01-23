@@ -74,6 +74,10 @@ These projects are grouped into various categories.
 
   https://github.com/sauveerk/projects/blob/main/Kubernetes-GitOps.md
 
+- **Java Web App on AWS App Runner** - Deploying a Java web app on AWS App Runner. AWS App Runner is a fully managed, pay as you go service.
+  
+  https://github.com/sauveerk/projects/blob/main/AWS-App-Runner-GitHub-Java-Web-App-Deployment.md
+
 ## Design Patterns
 
 - **Implementing a Fanout Pattern using SNS and SQS in AWS** - The fanout messaging pattern is a common application integration design pattern used to decouple frontend from backend systems. Here, a single message is sent to multiple endpoints. In AWS, this can be efficiently achieved by integrating Amazon SNS and Amazon SQS.
