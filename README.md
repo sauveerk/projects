@@ -85,3 +85,7 @@ These projects are grouped into various categories.
   https://github.com/sauveerk/projects/blob/main/FanoutPattern-SNS-SQS.md
 
 
+## Generative AI
+
+- **AWS MCP Servers** -  Model Context Protocol (MCP) servers provide a standardized way for Generative AI LLMs to connect to data sources and tools. AWS MCP servers can be used for a variety of tasks - cost analysis, CDK template generation, Terraform template genration, architeture diagram creation, etc.
+
