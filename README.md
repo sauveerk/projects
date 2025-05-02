@@ -88,6 +88,8 @@ These projects are grouped into various categories.
 ## Generative AI
 
 - **Agentic AI - Amazon Bedrock Agents** -  AI agents extend large language models (LLMs) by interacting with external systems, executing complex workflows, and maintaining contextual awareness across operations. Amazon Bedrock Agents enables this functionality by orchestrating foundation models (FMs) with data sources, applications, and user inputs to complete goal-oriented tasks through API integration and knowledge base augmentation. 
+  
+  https://github.com/sauveerk/projects/blob/main/Agentic-AI-Amazon-Bedrock-Agents.md
 
 - **AWS MCP Servers** -  Model Context Protocol (MCP) servers provide a standardized way for Generative AI LLMs to connect to data sources and tools. AWS MCP servers can be used for a variety of tasks - cost analysis, CDK template generation, Terraform template genration, architeture diagram creation, etc.
   

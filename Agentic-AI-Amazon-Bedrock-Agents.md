@@ -46,7 +46,7 @@ To follow along with this tutorial, you will need:
 - You can find the complete Python code for these functions in the following GitHub repository:
 
     https://github.com/sauveerk/projects/tree/main/Code
-
+[](https://github.com/sauveerk/projects/tree/main/Code/Gen-AI-Bedrock-Agents)
    ### Lambda Function 1: List EC2 Instances
 
    This function, action_group_ec2,
