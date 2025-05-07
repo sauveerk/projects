@@ -46,7 +46,7 @@ To follow along with this tutorial, you will need:
 - You can find the complete Python code for these functions in the following GitHub repository:
 
     https://github.com/sauveerk/projects/tree/main/Code
-[](https://github.com/sauveerk/projects/tree/main/Code/Gen-AI-Bedrock-Agents)
+
    ### Lambda Function 1: List EC2 Instances
 
    This function, action_group_ec2,
@@ -209,7 +209,11 @@ To follow along with this tutorial, you will need:
 - Amazon Bedrock agents can be connected to MCP servers, enabling them to access various external data sources and services. Rerfer to below blog.
   
    https://aws.amazon.com/blogs/machine-learning/harness-the-power-of-mcp-servers-with-amazon-bedrock-agents/
-   
+
+
+- In next article, we will build a custom web applications that leverage Bedrock Agents for AWS operations. A custom web app is a very compelling use case for many organizations. It can increase operational efficiency and improve accessiblity and empowerment.
+
+- Please note that Amazon Q already has some functionlities like information retrieval and troubleshooting assistance. But, you define Action Groups and Knowledge Bases for your agent that are unique to your organization, you can provide tailored User Experience and Workflow Integration. Amazon Q in the console is a great starting point and provides general AWS assistance. A custom web application built on Bedrock Agents allows you to create a highly specialized, integrated, and controlled operational tool tailored precisely to your organization's unique environment, processes, and user needs, going beyond the generic capabilities of a console-level assistant. It's about building your organization's intelligent assistant for its specific operational challenges.   
 
 
 
