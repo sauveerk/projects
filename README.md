@@ -91,6 +91,10 @@ These projects are grouped into various categories.
   
   https://github.com/sauveerk/projects/blob/main/Agentic-AI-Amazon-Bedrock-Agents.md
 
+- **Agentic AI - AWS DevOps Web App** -  Creating custom web applications that leverage Bedrock Agents for AWS operations is a very compelling use case for many organizations. It enhances accessibility by enabling the users who are not experts in the AWS console, CLI, or SDKs to perform pre-defined operational tasks. These can also assist technical teams and increase operational efficiency.
+  
+  https://github.com/sauveerk/projects/blob/main/Agentic-AI-AWS-DevOps-WebApp.md
+
 - **AWS MCP Servers** -  Model Context Protocol (MCP) servers provide a standardized way for Generative AI LLMs to connect to data sources and tools. AWS MCP servers can be used for a variety of tasks - cost analysis, CDK template generation, Terraform template genration, architeture diagram creation, etc.
   
   https://github.com/sauveerk/projects/blob/main/Using-AWS-MCP-Servers.md

@@ -281,7 +281,7 @@
  
 - Using Bedrock Agents for AWS operations essentially boils down to interacting with and managing your AWS resources using natural language commands. It simplifies resource creation, information retrieval, task execution and troubleshooting. It increases operational efficiency.
   
-- Creating custom web applications that leverage Bedrock Agents for AWS operations is a very compelling use case for many organizations. It enhances accessibility by enabling the users who are not experts in the AWS console, CLI, or SDKs to perform basic, pre-defined operational tasks.  
+- Creating custom web applications that leverage Bedrock Agents for AWS operations is a very compelling use case for many organizations. It enhances accessibility by enabling the users who are not experts in the AWS console, CLI, or SDKs to perform pre-defined operational tasks. These can also assist technical teams and increase operational efficiency. 
 
 - Please note that Amazon Q already has some functionalities like information retrieval and troubleshooting assistance. But, you define Action Groups and Knowledge Bases for your agent that are unique to your organization, you can provide tailored User Experience and Workflow Integration. Amazon Q in the console is a great starting point and provides general AWS assistance. A custom web application built on Bedrock Agents allows you to create a highly specialized, integrated, and controlled operational tool tailored precisely to your organization's unique environment, processes, and user needs, going beyond the generic capabilities of a console-level assistant. It's about building your organization's intelligent assistant for its specific operational challenges.   
 
